@@ -43,13 +43,13 @@ public class JavalinSingleton {
             String jsonString = ctx.body();
             
 
-            //utilize jackson to convert the json string to a user object
+            //utilize jackson to convert the json string to a Song object
             Song song = om.readValue(jsonString,Song.class);
 
             //change the artist name
             song.setArtistName("Beatles");
             
-            //generate an HTTP response with the user object in the response body as a JSON.
+            //generate an HTTP response with the Song object in the response body as a JSON.
             ctx.json(song);
         });
 
