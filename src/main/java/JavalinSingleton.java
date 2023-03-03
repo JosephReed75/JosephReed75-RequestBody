@@ -1,5 +1,7 @@
 
 
+import org.h2.engine.User;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.javalin.Javalin;
 
@@ -23,7 +25,8 @@ public class JavalinSingleton {
         app.post("/echo", ctx -> {
             
             //implement logic here
-                
+            String jsonString = ctx.body();   
+            ctx.json(jsonString); 
         });
 
         /**
@@ -36,7 +39,18 @@ public class JavalinSingleton {
         app.post("/changeartisttobeatles", ctx -> {
 
             //implement logic here
-               
+            //retrieve the json string from the request body
+            String jsonString = ctx.body();
+            
+
+            //utilize jackson to convert the json string to a user object
+            Song song = om.readValue(jsonString,Song.class);
+
+            //change the artist name
+            song.setArtistName("Beatles");
+            
+            //generate an HTTP response with the user object in the response body as a JSON.
+            ctx.json(song);
         });
 
 
